@@ -38,20 +38,12 @@ class Mock {
         while ( acessorios.size < randIndex ){
             val aux = gerarAcessorio()
 
-            if(!inAcessorios(aux, acessorios)){
+            if(aux !in acessorios){
                 acessorios.add(aux)
             }
         }
 
         return acessorios
-    }
-
-    private fun inAcessorios(acessorio: Acessorio, acessorios : List<Acessorio>) : Boolean{
-        for (aux in acessorios)
-            if(aux.nome == acessorio.nome)
-                return true
-
-        return false
     }
 
     private fun gerarBitmap( resources: Resources, imagemRes: Int) : Bitmap{

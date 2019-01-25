@@ -2,6 +2,7 @@ package br.com.carroskotlinapp
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import br.com.carroskotlinapp.adapter.CarrosAdapter
@@ -13,11 +14,19 @@ class CarrosActivity : AppCompatActivity() {
 
     val carros = ArrayList<Carro>()
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(Carro.CARROS, carros)
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carros)
 
-        carros.addAll(Mock().gerarCarro(resources))
+        carros.addAll(
+            savedInstanceState
+                ?. getParcelableArrayList(Carro.CARROS)
+                ?: Mock().gerarCarro(resources))
         initRecycler()
     }
 

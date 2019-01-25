@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.com.carroskotlinapp.R
+import br.com.carroskotlinapp.bold
 //import br.com.carroskotlinapp.bold
 import br.com.carroskotlinapp.domain.Carro
+import br.com.carroskotlinapp.getPrecoHuman
+
 //import br.com.carroskotlinapp.getPrecoHuman
 
 class CarrosAdapter (
@@ -61,10 +64,10 @@ class CarrosAdapter (
                 tvModelo.text = carro.modelo
                 ivLogo.setImageResource(carro.marca.logo)
                 tvMarca.text = String.format("%s - %d", carro.marca.nome, carro.ano)
-                tvMotor.text = "Motor: ${carro.motor.modelo} " +
-                        "(${carro.motor.cilindros}) - ${carro.motor.marca}"
-                tvAcessorios.text = "Acessórios: ${carro.getAcessoriosFormatted()}"
-                tvPreco.text = carro.preco.toString()
+                tvMotor.text = "Motor:".bold().append(
+                        "${carro.motor.modelo} (${carro.motor.cilindros}) - ${carro.motor.marca}")
+                tvAcessorios.text = "Acessórios: ".bold().append( carro.getAcessoriosFormatted())
+                tvPreco.text = carro.preco.getPrecoHuman()
             }
         }
     }
